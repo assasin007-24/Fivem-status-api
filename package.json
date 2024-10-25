@@ -1,13 +1,13 @@
 {
-    "name": "fivem-check-api",
-    "version": "1.0.0",
-    "main": "server.js", 
-    "scripts": {
-      "start": "node server.js",
-      "setup": "npm install axios express cors"
-    },
-    "dependencies": {
-      
-    }
+  "name": "fivem-check-api",
+  "version": "1.0.0",
+  "main": "api/server.js", 
+  "scripts": {
+      "start": "node api/server.js",
+      "setup": "npm install"
+  },
+  "dependencies": {
+      "express": "^4.18.1",
+      "cors": "^2.8.5"
   }
-  
+}
