@@ -1,13 +1,18 @@
 // server.js
 const express = require('express');
 const cors = require('cors');
-const { FiveM } = require('fivem-server-api'); // Import fivem-server-api
+const { FiveM } = require('fivem-server-api');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins, or specify specific origins here
+    methods: ['GET', 'POST', 'OPTIONS'], // Allow specific methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+}));
+
 app.use(express.json());
 
 // API endpoint to get FiveM server status
@@ -19,7 +24,6 @@ app.get('/api/status', async (req, res) => {
     }
 
     try {
-        // Use the FiveM package to check the server status
         const server = new FiveM(ip, port);
         const status = await server.getStatus();
 
@@ -38,3 +42,8 @@ app.get('/api/status', async (req, res) => {
 
 // Export the Express app for Vercel
 module.exports = app;
+
+// Start the server (optional if only exporting for Vercel)
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
