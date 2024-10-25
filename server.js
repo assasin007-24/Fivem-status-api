@@ -1,9 +1,11 @@
 // server.js
 const express = require('express');
 const net = require('net');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+// Enable CORS for all routes
+app.use(cors());
 app.use(express.json());
 
 // Function to check FiveM server status
@@ -19,7 +21,7 @@ const checkServerStatus = (ip, port) => {
         socket.on('data', (data) => {
             socket.destroy(); // Close the connection
             const response = data.toString();
-            const playersRegex = /"players":\s*([0-9]+)/; // Example regex, adjust based on actual response format
+            const playersRegex = /"players":\s*([0-9]+)/; 
             const maxPlayersRegex = /"maxPlayers":\s*([0-9]+)/;
 
             const connectedPlayers = playersRegex.exec(response) ? playersRegex.exec(response)[1] : 0;
